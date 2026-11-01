@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Газява & Снюс — Газируй и закуси!</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ШАПКА -->
+<header>
+  <div class="logo">ГАЗЯ<span>ВА</span>&<em>СНЮС</em></div>
+  <nav>
+    <a href="#catalog">Каталог</a>
+    <a href="#sign">О нас</a>
+    <button class="cart-btn" onclick="openCart()">🛒  Корзина (<span id="cartCount">0</span>)</button>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="badge">🚚  Доставка по городу за 1 час</div>
+  <h1>ГАЗИРУЙ — <span>И ЗАКУСИ!</span></h1>
+  <p>60+ вкусов газировки в жести. Подарок к каждому набору. Строго 18+.</p>
+  <button onclick="document.getElementById('catalog').scrollIntoView({behavior:'smooth'})">Смотреть вкусы</button>
+</section>
+
+<!-- КАТАЛОГ -->
+<section class="catalog" id="catalog">
+  <h2>Наши банки</h2>
+  <p class="sub">Выбери вкус — подарок подберём на кассе (18+)</p>
+  <div class="filters" id="filters"></div>
+  <div class="grid" id="grid"></div>
+</section>
+
+<!-- ВЫВЕСКА -->
+<section class="sign-section" id="sign">
+  <div class="sign">
+    <h2>🥤  ГАЗЯ<span>ВА</span> & СНЮС 🥤 </h2>
+    <div class="divider"></div>
+    <p class="slogan">ГАЗИРУЙ — И ЗАКУСИ!</p>
+    <ul>
+      <li>• 60+ вкусов газировки в жести</li>
+      <li>• 6-я банка — БЕСПЛАТНО</li>
+      <li>• Подарок к каждому набору</li>
+    </ul>
+    <div class="warn">⚠️  НИКОТИН — СТРОГО 18+<br>ПАСПОРТ ОБЯЗАТЕЛЕН</div>
+    <p class="hours">Работаем: 9:00 — 23:00<br>gazyava-snus.ru</p>
+  </div>
+</section>
+
+<!-- КОРЗИНА -->
+<div class="modal" id="cartModal">
+  <div class="modal-box">
+    <h2>🛒  Твоя корзина</h2>
+    <div id="cartItems"></div>
+    <div class="cart-total" id="cartTotal">0 ₽</div>
+    <button class="checkout" onclick="checkout()">Оформить заказ</button>
+  </div>
+</div>
+
+<!-- ФУТЕР -->
+<footer>
+  <div class="age">18+</div><br>
+  © 2026 Газява & Снюс. Продажа никотиносодержащей продукции лицам младше 18 лет запрещена.<br>
+  Курение и употребление никотина вредит вашему здоровью.
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script src="js/script.js"></script>
+</body>
+</html>

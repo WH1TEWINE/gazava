@@ -1,0 +1,152 @@
+/* ===== ПЕРЕМЕННЫЕ ===== */
+:root{
+  --bg:#0e0e12;
+  --card:#1a1a22;
+  --accent:#ff3d6e;
+  --accent2:#37e0b0;
+  --text:#f2f2f5;
+  --muted:#9a9aa8;
+}
+
+/* ===== СБРОС ===== */
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',system-ui,sans-serif}
+body{background:var(--bg);color:var(--text);line-height:1.5}
+
+/* ===== ШАПКА ===== */
+header{
+  position:sticky;top:0;z-index:100;
+  background:rgba(14,14,18,.92);backdrop-filter:blur(10px);
+  border-bottom:2px solid var(--accent);
+  padding:14px 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;
+}
+.logo{font-size:26px;font-weight:900;letter-spacing:1px}
+.logo span{color:var(--accent)}
+.logo em{color:var(--accent2);font-style:normal}
+nav{display:flex;gap:18px;align-items:center}
+nav a{color:var(--text);text-decoration:none;font-weight:600;font-size:15px;transition:.2s}
+nav a:hover{color:var(--accent)}
+.cart-btn{
+  background:var(--accent);color:#fff;border:none;padding:10px 18px;border-radius:30px;
+  font-weight:700;cursor:pointer;transition:.2s;font-size:15px;
+}
+.cart-btn:hover{transform:scale(1.05);background:#ff5580}
+
+/* ===== HERO ===== */
+.hero{
+  text-align:center;padding:70px 24px;
+  background:radial-gradient(circle at 50% 0%,#2a0f1a 0%,var(--bg) 70%);
+}
+.hero h1{font-size:clamp(32px,6vw,64px);font-weight:900;line-height:1.1}
+.hero h1 span{color:var(--accent)}
+.hero p{color:var(--muted);font-size:18px;margin:16px 0 28px}
+.hero .badge{
+  display:inline-block;background:var(--accent2);color:#0e0e12;font-weight:800;
+  padding:6px 16px;border-radius:20px;font-size:14px;margin-bottom:20px;
+}
+.hero button{
+  background:linear-gradient(135deg,var(--accent),#ff8a5c);
+  color:#fff;border:none;padding:16px 40px;border-radius:40px;
+  font-size:18px;font-weight:800;cursor:pointer;transition:.25s;
+}
+.hero button:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(255,61,110,.4)}
+
+/* ===== КАТАЛОГ ===== */
+.catalog{padding:60px 24px;max-width:1200px;margin:0 auto}
+.catalog h2{font-size:34px;margin-bottom:8px}
+.catalog .sub{color:var(--muted);margin-bottom:24px}
+.filters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:32px}
+.filter{
+  background:var(--card);color:var(--text);border:2px solid transparent;
+  padding:9px 20px;border-radius:30px;cursor:pointer;font-weight:600;transition:.2s;
+}
+.filter:hover{border-color:var(--accent2)}
+.filter.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:20px}
+.card{
+  background:var(--card);border-radius:18px;padding:20px;
+  display:flex;flex-direction:column;gap:10px;
+  border:1px solid #26262f;transition:.25s;position:relative;overflow:hidden;
+}
+.card:hover{transform:translateY(-6px);border-color:var(--accent);box-shadow:0 16px 36px rgba(0,0,0,.5)}
+.card .emoji{font-size:44px;text-align:center}
+.card h3{font-size:17px}
+.card .tag{font-size:12px;color:var(--accent2);font-weight:700;text-transform:uppercase;letter-spacing:.5px}
+.card .price{font-size:22px;font-weight:900;color:var(--accent);margin-top:auto}
+.card .gift{font-size:12px;color:var(--accent2);font-weight:600}
+.card button{
+  margin-top:8px;background:transparent;border:2px solid var(--accent);color:var(--accent);
+  padding:10px;border-radius:12px;font-weight:700;cursor:pointer;transition:.2s;
+}
+.card button:hover{background:var(--accent);color:#fff}
+
+/* ===== ВЫВЕСКА ===== */
+.sign-section{padding:60px 24px;display:flex;justify-content:center}
+.sign{
+  background:#111;border:4px double var(--accent);border-radius:14px;
+  padding:32px 44px;max-width:520px;text-align:center;
+  box-shadow:0 0 40px rgba(255,61,110,.25);
+}
+.sign h2{font-size:32px;letter-spacing:2px}
+.sign h2 span{color:var(--accent)}
+.sign .divider{height:2px;background:var(--accent2);margin:14px 0}
+.sign .slogan{color:var(--accent2);font-weight:800;font-size:18px;letter-spacing:1px}
+.sign ul{list-style:none;margin:18px 0;color:var(--muted);font-size:15px}
+.sign ul li{padding:4px 0}
+.sign .warn{
+  background:#3a0d16;color:#ff7a95;border:1px solid var(--accent);
+  padding:10px;border-radius:8px;font-weight:800;font-size:14px;margin-top:10px;
+}
+.sign .hours{margin-top:14px;color:var(--text);font-weight:600;font-size:14px}
+
+/* ===== МОДАЛКА КОРЗИНЫ ===== */
+.modal{
+  position:fixed;inset:0;background:rgba(0,0,0,.75);display:none;
+  align-items:center;justify-content:center;padding:20px;z-index:200;
+}
+.modal.open{display:flex}
+.modal-box{
+  background:var(--card);border-radius:20px;padding:28px;max-width:460px;width:100%;
+  border:2px solid var(--accent);max-height:85vh;overflow-y:auto;
+}
+.modal-box h2{margin-bottom:16px;font-size:24px}
+.cart-item{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:12px 0;border-bottom:1px solid #2c2c38;font-size:15px;
+}
+.cart-item button{
+  background:#3a0d16;color:var(--accent);border:none;border-radius:8px;
+  width:30px;height:30px;cursor:pointer;font-weight:800;font-size:16px;
+}
+.cart-total{font-size:22px;font-weight:900;color:var(--accent);margin-top:20px;text-align:right}
+.cart-empty{color:var(--muted);text-align:center;padding:20px 0}
+.checkout{
+  width:100%;margin-top:18px;background:var(--accent2);color:#0e0e12;border:none;
+  padding:14px;border-radius:12px;font-weight:800;font-size:16px;cursor:pointer;transition:.2s;
+}
+.checkout:hover{background:#5cf5c5}
+
+/* ===== ФУТЕР ===== */
+footer{
+  text-align:center;padding:40px 24px;color:var(--muted);font-size:14px;
+  border-top:1px solid #26262f;
+}
+footer .age{
+  display:inline-block;background:var(--accent);color:#fff;font-weight:900;
+  width:40px;height:40px;border-radius:50%;line-height:40px;margin-bottom:12px;font-size:14px;
+}
+
+/* ===== TOAST ===== */
+.toast{
+  position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(100px);
+  background:var(--accent2);color:#0e0e12;font-weight:800;padding:14px 28px;border-radius:30px;
+  transition:.3s;z-index:300;opacity:0;pointer-events:none;
+}
+.toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+
+/* ===== АДАПТИВ ===== */
+@media(max-width:600px){
+  .sign{padding:24px 20px}
+  .sign h2{font-size:24px}
+  .hero{padding:50px 20px}
+}
