@@ -91,13 +91,15 @@ function checkout() {
         return;
     }
 
-    // Собираем данные для отправки
+    // Собираем данные
     const orderData = {
-        customerName: "Клиент", // Если добавите поле для имени, подставьте его сюда
-        phone: "Не указан",
+        customerName: "Тестовый Клиент",
+        phone: "1234567890",
         items: cart.map(item => item.name).join(", "),
-        totalPrice: cart.reduce((sum, item) => sum + item.price, 0)
+        totalPrice: 100 // Временно ставим фиксированную цену для теста
     };
+
+    console.log("Отправляем заказ:", orderData); // Это покажет данные в консоли
 
     // Отправляем данные на Java-сервер
     fetch('/api/orders', {
@@ -108,29 +110,20 @@ function checkout() {
         body: JSON.stringify(orderData)
     })
     .then(response => {
+        console.log("Ответ сервера:", response);
         if (response.ok) {
-            alert("Заказ оформлен! С вами свяжутся (7+).");
-            cart = []; // Очищаем корзину
+            alert("Заказ оформлен!");
+            cart = [];
             renderCart();
             closeCart();
         } else {
-            alert("Ошибка при оформлении заказа.");
+            alert("Ошибка сервера: " + response.status);
         }
     })
     .catch(error => {
-        console.error('Ошибка:', error);
+        console.error('Ошибка сети:', error);
         alert("Сервер недоступен.");
     });
-}
-
-/* ===== TOAST ===== */
-let toastTimer;
-function showToast(msg){
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.classList.add('show');
-  clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => t.classList.remove('show'), 2200);
 }
 
 /* ===== ЗАКРЫТИЕ МОДАЛКИ ПО КЛИКУ НА ФОН ===== */
