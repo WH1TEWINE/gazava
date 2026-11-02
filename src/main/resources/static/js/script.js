@@ -85,21 +85,43 @@ function openCart(){
   updateCartUI();
 }
 
+function closeCart() {
+    document.getElementById('cartModal').classList.remove('open');
+}
+
+// Вспомогательная функция для уведомлений (Toast)
+function showToast(msg) {
+    const toast = document.getElementById('toast');
+    if (toast) {
+        toast.innerText = msg;
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 2000);
+    }
+}
+
+/* ===== ОТПРАВКА ЗАКАЗА НА СЕРВЕР ===== */
 function checkout() {
     if (cart.length === 0) {
         alert("Корзина пуста!");
         return;
     }
 
-    // Собираем данные
+    // Правильно собираем данные из корзины (находим названия и считаем сумму)
+    let totalPrice = 0;
+    const itemsList = cart.map(item => {
+        const p = products.find(x => x.id === item.id);
+        totalPrice += p.price * item.qty;
+        return `${p.name} (${item.qty} шт.)`;
+    }).join(", ");
+
     const orderData = {
         customerName: "Тестовый Клиент",
         phone: "1234567890",
-        items: cart.map(item => item.name).join(", "),
-        totalPrice: 100 // Временно ставим фиксированную цену для теста
+        items: itemsList,
+        totalPrice: totalPrice
     };
 
-    console.log("Отправляем заказ:", orderData); // Это покажет данные в консоли
+    console.log("Отправляем заказ:", orderData);
 
     // Отправляем данные на Java-сервер
     fetch('/api/orders', {
@@ -112,9 +134,9 @@ function checkout() {
     .then(response => {
         console.log("Ответ сервера:", response);
         if (response.ok) {
-            alert("Заказ оформлен!");
+            alert("Заказ оформлен! Проверьте /api/orders/view");
             cart = [];
-            renderCart();
+            updateCartUI();
             closeCart();
         } else {
             alert("Ошибка сервера: " + response.status);
