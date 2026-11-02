@@ -85,16 +85,42 @@ function openCart(){
   updateCartUI();
 }
 
-function checkout(){
-  if (cart.length === 0){ showToast('Корзина пуста'); return; }
-  const total = cart.reduce((s, i) => {
-    const p = products.find(x => x.id === i.id);
-    return s + p.price * i.qty;
-  }, 0);
-  showToast(`Заказ на ${total} ₽ оформлен! Ждите курьера 🚚 `);
-  cart = [];
-  updateCartUI();
-  document.getElementById('cartModal').classList.remove('open');
+function checkout() {
+    if (cart.length === 0) {
+        alert("Корзина пуста!");
+        return;
+    }
+
+    // Собираем данные для отправки
+    const orderData = {
+        customerName: "Клиент", // Если добавите поле для имени, подставьте его сюда
+        phone: "Не указан",
+        items: cart.map(item => item.name).join(", "),
+        totalPrice: cart.reduce((sum, item) => sum + item.price, 0)
+    };
+
+    // Отправляем данные на Java-сервер
+    fetch('/api/orders', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(orderData)
+    })
+    .then(response => {
+        if (response.ok) {
+            alert("Заказ оформлен! С вами свяжутся (7+).");
+            cart = []; // Очищаем корзину
+            renderCart();
+            closeCart();
+        } else {
+            alert("Ошибка при оформлении заказа.");
+        }
+    })
+    .catch(error => {
+        console.error('Ошибка:', error);
+        alert("Сервер недоступен.");
+    });
 }
 
 /* ===== TOAST ===== */
